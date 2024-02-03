@@ -11,7 +11,7 @@ query = "i like socks"
 request = youtube.search().list(
     q=query,
     part="snippet",
-    maxResults=10
+    maxResults=9
 )
 
 """generate a url for each query"""
@@ -29,7 +29,7 @@ def generate_url(query):
     request = youtube.search().list(
         q=query,
         part="snippet",
-        maxResults=1,
+        maxResults=5,
         type='video',
         videoDuration = 'medium',
         videoEmbeddable = 'true',
@@ -37,6 +37,15 @@ def generate_url(query):
     )
 
     response = request.execute()
+    
+    for search_result in response.get('items', []):
+        # Access the snippet data for each search result
+        snippet = search_result.get('snippet', {})
+        title = snippet.get('title')
+        thumbnails = snippet.get('thumbnails', {})
+        default_thumbnail_url = thumbnails.get('default', {}).get('url')
+        print("Here is the new method for this", title,default_thumbnail_url)
+
     thumbnails = response['items'][0]['snippet']['thumbnails']
     #print(response)
     return ('https://www.youtube.com/watch?v=' + response['items'][0]['id']['videoId'], thumbnails['default']['url'])
