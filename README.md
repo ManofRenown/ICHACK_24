@@ -16,6 +16,6 @@ Then using this summary we must find matching youtube videos which help further 
 Then we have to present this data to the user in a meaningful way
 
 # Dependencies
-pip install PyPDF2
-pip install Tesseract
-pip install Pillow
+pip install PyPDF2 \
+pip install Tesseract \
+pip install Pillow \
