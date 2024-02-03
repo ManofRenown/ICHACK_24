@@ -4,7 +4,7 @@ import PyPDF2
 from PIL import Image
 
 def select(file):
-	if file.endswith('.txt') or file.endswith('.md'):
+	if file.endswith('.txt') or file.endswith('.md') or file.endswith('.html'):
 		text(file)
 	elif file.endswith('.pdf'):
 		pdf(file)
