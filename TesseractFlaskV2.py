@@ -7,7 +7,7 @@ app = Flask(__name__)
 def run_script():
     try:
         # Execute the Python script
-        result = subprocess.run(['python', 'your_script.py'], capture_output=True, text=True) #your script should be replaced with path to our script
+        result = subprocess.run(['python', './test_server.py'], capture_output=True, text=True) #your script should be replaced with path to our script
         if result.returncode == 0:
             return 'Script executed successfully'
         else:
