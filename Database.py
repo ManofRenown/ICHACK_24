@@ -2,7 +2,7 @@ from googleapiclient.discovery import build
 import sqlite3
 import random
 
-def add_entries(email, urls, notes):
+def add_entries(email, urls, notes, images):
     # Connect to the SQLite database
     conn = sqlite3.connect('youtube_data.db')
     cursor = conn.cursor()
@@ -21,7 +21,8 @@ def add_entries(email, urls, notes):
                 url TEXT,
                 notes TEXT,  
                 email TEXT,
-                note_id INTEGER
+                note_id INTEGER,
+                images TEXT
             )
         ''')
         max_note_id = 0
@@ -39,11 +40,11 @@ def add_entries(email, urls, notes):
             max_note_id += 1
     
     # Insert entries into the table with the same note_id
-    for url, note in zip(urls, notes):
+    for url, note, image in zip(urls, notes, images):
         cursor.execute('''
-            INSERT INTO youtube_videos (url, notes, email, note_id)
-            VALUES (?, ?, ?, ?)
-        ''', (url, note, email, max_note_id))
+            INSERT INTO youtube_videos (url, notes, email, note_id, images)
+            VALUES (?, ?, ?, ?, ?)
+        ''', (url, note, email, max_note_id, image))
     
     # Commit the changes and close the connection
     conn.commit()
@@ -77,7 +78,8 @@ def get_random_entries(email, num_entries):
     for entry in selected_entries:
         entry_dict = {
             "url": entry[1],  # URL is at index 1
-            "notes": entry[2]  # Notes is at index 3
+            "notes": entry[2],  # Notes is at index 2
+            "images": entry[5] # Images is at index 5
         }
         entries_list.append(entry_dict)
     
@@ -100,7 +102,8 @@ def delete_and_create_table():
             url TEXT,
             notes TEXT,
             email TEXT,
-            note_id INTEGER
+            note_id INTEGER,
+            images TEXT
         )
     ''')
 
@@ -116,24 +119,28 @@ def test_add_entries():
     email1 = 'test1@example.com'
     urls1 = ['url1', 'url2', 'url3']
     notes1 = ['note1', 'note2', 'note3']
-    add_entries(email1, urls1, notes1)
+    images1 = ['image1', 'image2', 'image3']
+    add_entries(email1, urls1, notes1, images1)
     
     # Test case 2: Adding entries for an existing email
     email2 = 'test2@example.com'
     urls2 = ['url4', 'url5']
     notes2 = ['note4', 'note5']
-    add_entries(email2, urls2, notes2)
+    images2 = ['image4, image5']
+    add_entries(email2, urls2, notes2, images2)
     
     # Test case 3: Adding entries for an existing email with existing entries
     urls3 = ['url6']
     notes3 = ['note6']
-    add_entries(email1, urls3, notes3)
+    images3 = ['image3']
+    add_entries(email1, urls3, notes3, images3)
     
     # Test case 4: Adding entries for a non-existing email
     email4 = 'test4@example.com'
     urls4 = ['url7']
     notes4 = ['note7']
-    add_entries(email4, urls4, notes4)
+    images4 = ['images4']
+    add_entries(email4, urls4, notes4, images4)
 
 # Sample tests for get_random_entries function
 def test_get_random_entries():
