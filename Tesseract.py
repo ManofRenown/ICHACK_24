@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import pytesseract
 from PIL import Image
 
