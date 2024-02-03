@@ -1,18 +1,19 @@
 from flask import Flask, request, jsonify
+import subprocess
+
 app = Flask(__name__)
 
-@app.route('/run_script', methods=['POST'])
+@app.route('/run_script')
 def run_script():
-    # Assuming the input file is sent as form data
-    input_file = request.files['file']
-    # Process the file or data as needed
-    # Example: read the file content
-    file_content = input_file.read().decode('utf-8')
-    # Your processing logic here, you can call another Python script or function
-
-    # Example: returning the processed content as JSON
-    output_data = {"Type": type(file_content)}
-    return jsonify(output_data)
+    try:
+        # Execute the Python script
+        result = subprocess.run(['python', 'your_script.py'], capture_output=True, text=True) #your script should be replaced with path to our script
+        if result.returncode == 0:
+            return 'Script executed successfully'
+        else:
+            return 'Error executing script: ' + result.stderr, 500
+    except Exception as e:
+        return 'Error: ' + str(e), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
