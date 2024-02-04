@@ -131,7 +131,7 @@ OCR technology is important for businesses as it allows for the conversion of im
 This enables the utilization of text editing, searching, and word counting functionalities that are not possible with image files. 
 It simplifies the process of managing large volumes of paperwork and facilitates paperless document management, ultimately improving efficiency and productivity in business workflows."""
 
-print(markdown2.markdown(highlight2))
+#print(markdown2.markdown(highlight2))
 
 email_html = """<h2>Your Daily insights</h2>
 <h4>Significance of OCR for Business Workflows</h4>

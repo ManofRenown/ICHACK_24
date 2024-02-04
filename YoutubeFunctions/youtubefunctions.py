@@ -43,8 +43,8 @@ def generate_url(query):
     #print(response)
     return ('https://www.youtube.com/watch?v=' + response['items'][0]['id']['videoId'], response['items'][0]['snippet']['thumbnails']['default']['url'], response['items'][0]['snippet']['title'])
 
-print("\n\n")
-print(generate_url("Chinese youth slang rùn meaning to flee"))
+#print("\n\n")
+#print(generate_url("How is cricket related to business"))
 
 """response = request.execute()
 
