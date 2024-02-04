@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify
 import PyPDF2
 from PIL import Image
 from flask_cors import CORS
-from RelevantYTVidGenerator import generate_yt_insights, generate_yt_title
+from RelevantYTVidGenerator import generate_yt_insights, generate_yt_titles
 import Database
 
 #Functions for reading the different file types to txt
@@ -38,11 +38,11 @@ def pdf(pdf_file):
 #Finds the file type and runs the appropriate function
 def select(file):
 	if file.endswith('.txt') or file.endswith('.md') or file.endswith('.html'):
-		text(file)
+		return text(file)
 	elif file.endswith('.pdf'):
-		pdf(file)
+		return pdf(file)
 	else:
-		pic(file)
+		return pic(file)
 
 app = Flask(__name__)
 CORS(app)
@@ -53,14 +53,14 @@ def run_script():
     input_file = request.files['file']
     #The email and the file are contained inside this!!!!!!!!!!!!!!!!
     # Process the file or data as needed
-    ##text = select(input_file)
-    #urls, thumbnails = generate_yt_titles(text, 5) #generate the relevant urls and thumnails, need to get titles as well
-    #insights, insight_urls, insight_thumbnails = generate_yt_insights(text) #generate the insights and relevant videos
-    #Database.add_entries(recipeint_email, youtube_url_list, insights, youtube_thumbnail_list) #datebot
+    text = select(input_file)
+    urls, thumbnails, titles = generate_yt_titles(text, 5) #generate the relevant urls and thumnails, need to get titles as well
+    insights, insight_urls, insight_thumbnails = generate_yt_insights(text) #generate the insights and relevant videos
+    Database.add_entries("ruthvikkonduru29@gmail", insight_urls, insights, insight_thumbnails) #datebot
     return jsonify({
-        'links': ["https://coolmathgames.com", "https://star trek.com", "https://taylorswift.com","https://google.co.uk","https://ic.ac.uk"],
-        'thumbnails': ["https://i.ytimg.com/vi/cPG6nJRJeWQ/default.jpg", "https://i.ytimg.com/vi/cPG6nJRJeWQ/default.jpg","https://i.ytimg.com/vi/cPG6nJRJeWQ/default.jpg","https://i.ytimg.com/vi/cPG6nJRJeWQ/default.jpg","https://i.ytimg.com/vi/cPG6nJRJeWQ/default.jpg"],
-        'titles': ["Cool Math Games", "Star Trek", "Taylor Swift", "Google UK", "Imperial College London"]
+        'links': urls, #["https://coolmathgames.com", "https://star trek.com", "https://taylorswift.com","https://google.co.uk","https://ic.ac.uk"],
+        'thumbnails': thumbnails,
+        'titles': titles
     })
     
 

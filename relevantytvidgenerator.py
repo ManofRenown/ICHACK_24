@@ -51,7 +51,8 @@ def generate_yt_titles(note, num_requests):
   youtube_url_tuples = youtubefunctions.generate_urls(youtube_requests_list, num_requests) #list of tuples containing video url and thumbnail url
   youtube_urls_list = [t[0] for t in youtube_url_tuples] #get all the youtube urls
   youtube_thumbnails_list = [t[1] for t in youtube_url_tuples] #get all the thumbnail urls
-  return youtube_urls_list, youtube_thumbnails_list #return both lists
+  youtube_titles_list = [t[2] for t in youtube_url_tuples] #get all the titles
+  return youtube_urls_list, youtube_thumbnails_list, youtube_titles_list #return both lists
   print("url list: ", youtube_urls_list)
 
 def generate_yt_insights(note):
@@ -80,7 +81,7 @@ def generate_yt_insights(note):
   youtube_thumbnails_list = []
   final_insights_list = [] #we only include insights that actually can find relevant urls
   for insight in insights:
-    youtube_urls, youtube_thumbnails = generate_yt_titles(insight, 1)
+    youtube_urls, youtube_thumbnails, youtube_titles = generate_yt_titles(insight, 1)
     print("the insight: \n" + insight + "\n")
     #print("youtube urls: ", youtube_urls)
     if len(youtube_urls) > 0: #youtube_urls and thumbnails will have the same length
@@ -143,9 +144,10 @@ Chinese youths have adopted the slang term "rùn," meaning to flee, as a way to 
 highlight2 = """### Importance of OCR
 OCR technology is important for businesses as it allows for the conversion of image files, such as scanned documents, into machine-readable text format. This enables the utilization of text editing, searching, and word counting functionalities that are not possible with image files. It simplifies the process of managing large volumes of paperwork and facilitates paperless document management, ultimately improving efficiency and productivity in business workflows."""
 
-"""url, thumbnail = generate_yt_titles(notes, 5)
+"""url, thumbnail, title = generate_yt_titles(notes, 5)
 print("final url: ", url)
-print("final thumbail: ", thumbnail)"""
+print("final thumbail: ", thumbnail)
+print("final title: ", title)"""
 
 """
 insights, youtube_url_list, youtube_thumbnail_list = generate_yt_insights(notes)
@@ -170,8 +172,8 @@ email_html = EmailSender.build_email(insight_infos)
 
 print(email_html)
 
-EmailSender.send_email(email_html, "ruthvikkonduru29@gmail.com")
-"""
+EmailSender.send_email(email_html, "ruthvikkonduru29@gmail.com")"""
+
 
 
 
