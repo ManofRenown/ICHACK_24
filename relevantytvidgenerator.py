@@ -1,5 +1,7 @@
 import OpenAIFunctions.openaifunctions as openaifunctions
 import YoutubeFunctions.youtubefunctions as youtubefunctions
+import EmailSender
+import Database
 from openai import OpenAI
 import os
 import json
@@ -43,9 +45,10 @@ def generate_yt_titles(note, num_requests):
 
     #youtube_urls_list.append(initial_url)"""
   
-  youtube_urls_list = youtubefunctions.generate_urls(youtube_requests_list, num_requests)
-  
-  return youtube_urls_list
+  youtube_url_tuples = youtubefunctions.generate_urls(youtube_requests_list, num_requests) #list of tuples containing video url and thumbnail url
+  youtube_urls_list = [t[0] for t in youtube_url_tuples] #get all the youtube urls
+  youtube_thumbnails_list = [t[1] for t in youtube_url_tuples] #get all the thumbnail urls
+  return youtube_urls_list, youtube_thumbnails_list #return both lists
   print("url list: ", youtube_urls_list)
 
 def generate_yt_insights(note):
@@ -67,20 +70,22 @@ def generate_yt_insights(note):
   open_ai_response = openaifunctions.send_message(client,assistant_id,thread_id,full_open_ai_request)
 
   # Use regular expression to split the string based on Markdown headings
-  insights = re.split(r'\n(#+ .+)\n', open_ai_response.strip())
+  insights = re.split(r'\n(#{1,6})\s', open_ai_response.strip())
 
   youtube_urls_list = []
+  youtube_thumbnails_list = []
   for insight in insights:
-    youtube_urls = generate_yt_titles(insight, 1)
+    youtube_urls, youtube_thumbnails = generate_yt_titles(insight, 1)
     print("the insight: \n" + insight + "\n")
     #print("youtube urls: ", youtube_urls)
-    if len(youtube_urls) > 0:
-      youtube_urls_list.append(youtube_urls[0])
+    if len(youtube_urls) > 0: #youtube_urls and thumbnails will have the same length
+      youtube_urls_list.append(youtube_urls[0]) #first element of tuple is url link
+      youtube_thumbnails_list.append(youtube_thumbnails[0]) #second element of tuple is the thumbnail link
 
     
     print("the url: ", youtube_urls[0])
 
-  return (insights, youtube_urls_list)
+  return (insights, youtube_urls_list, youtube_thumbnails_list)
 
 notes = """Optical Character Recognition (OCR) is the process that converts an image of text into a machine-readable text format. For example, if you scan a form or a receipt, your computer saves the scan as an image file. You cannot use a text editor to edit, search, or count the words in the image file. However, you can use OCR to convert the image into a text document with its contents stored as text data.
 Why is OCR important?
@@ -127,14 +132,23 @@ Chinese youths have adopted the slang term "rùn," meaning to flee, as a way to 
 highlight2 = """### Importance of OCR
 OCR technology is important for businesses as it allows for the conversion of image files, such as scanned documents, into machine-readable text format. This enables the utilization of text editing, searching, and word counting functionalities that are not possible with image files. It simplifies the process of managing large volumes of paperwork and facilitates paperless document management, ultimately improving efficiency and productivity in business workflows."""
 
-#generate_yt_titles(highlight2, 1)
-insights, youtube_url_lists = generate_yt_insights(notes)
+"""url, thumbnail = generate_yt_titles(highlight2, 1)
+print("final url: ", url)
+print("final thumbail: ", thumbnail)"""
+
+insights, youtube_url_list, youtube_thumbnail_list = generate_yt_insights(notes)
+
+
 
 print("final insights: \n")
 print(insights)
 print("\n\nfinal urls: ")
-print(youtube_url_lists)
+print(youtube_url_list)
+print("\n\nthumbnails urls: ")
+print(youtube_thumbnail_list)
 
+
+email_html = EmailSender.build_email()
 
 
 
