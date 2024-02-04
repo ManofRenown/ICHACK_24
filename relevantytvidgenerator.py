@@ -70,7 +70,8 @@ def generate_yt_insights(note):
   open_ai_response = openaifunctions.send_message(client,assistant_id,thread_id,full_open_ai_request)
 
   # Use regular expression to split the string based on Markdown headings
-  insights = re.split(r'\n(#{1,6})\s', open_ai_response.strip())
+  insights = re.split('#', open_ai_response.strip())
+  insights = ['####' + insight for insight in insights if insight != ''] #format all headings as h4
 
   youtube_urls_list = []
   youtube_thumbnails_list = []
@@ -142,13 +143,23 @@ insights, youtube_url_list, youtube_thumbnail_list = generate_yt_insights(notes)
 
 print("final insights: \n")
 print(insights)
+print("num insights: ", len(insights))
 print("\n\nfinal urls: ")
 print(youtube_url_list)
 print("\n\nthumbnails urls: ")
 print(youtube_thumbnail_list)
 
+Database.add_entries("ruthvikkonduru29@gmail.com", youtube_url_list, insights, youtube_thumbnail_list)
+insight_infos = Database.get_random_entries("ruthvikkonduru29@gmail.com",2)
 
-email_html = EmailSender.build_email()
+print("insight infos: ")
+print(insight_infos)
+
+email_html = EmailSender.build_email(insight_infos)
+
+print(email_html)
+
+EmailSender.send_email(email_html)
 
 
 
