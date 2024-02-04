@@ -31,17 +31,9 @@ def generate_url(query):
     )
 
     response = request.execute()
-    
-    for search_result in response.get('items', []):
-        # Access the snippet data for each search result
-        snippet = search_result.get('snippet', {})
-        title = snippet.get('title')
-        thumbnails = snippet.get('thumbnails', {})
-        default_thumbnail_url = thumbnails.get('default', {}).get('url')
-        #print("Here is the new method for this", title,default_thumbnail_url)
 
     if len(response['items']) > 0:
-        return ('https://www.youtube.com/watch?v=' + response['items'][0]['id']['videoId'], response['items'][0]['snippet']['thumbnails']['default']['url'], response['items'][0]['snippet']['title'])
+        return ('https://www.youtube.com/watch?v=' + response['items'][0]['id']['videoId'], response['items'][0]['snippet']['thumbnails']['maxres']['url'], response['items'][0]['snippet']['title'])
     else:
         print("no search results for this query: ", query)
         return ("","","")
