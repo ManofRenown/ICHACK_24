@@ -6,13 +6,6 @@ api_version = 'v3'
 
 youtube = build(api_service_name, api_version, developerKey=api_key)
 
-query = "i like socks"
-
-request = youtube.search().list(
-    q=query,
-    part="snippet",
-    maxResults=9
-)
 
 """generate a url for each query"""
 def generate_urls(list_of_queries, num_queries):
