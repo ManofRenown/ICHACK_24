@@ -42,7 +42,7 @@ def add_entries(email, urls, notes, images):
     # Insert entries into the table with the same note_id
     for url, note, image in zip(urls, notes, images):
         cursor.execute('''
-            INSERT INTO youtube_videos (url, notes, email, note_id, images)
+            INSERT OR IGNORE INTO youtube_videos (url, notes, email, note_id, images)
             VALUES (?, ?, ?, ?, ?)
         ''', (url, note, email, max_note_id, image))
     

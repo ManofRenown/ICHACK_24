@@ -1,6 +1,6 @@
 from googleapiclient.discovery import build
 
-api_key = 'AIzaSyDaYiSldkshg_pVfJZL37DjKRlKQo7AVX8'
+api_key = 'AIzaSyAsI56WOEKoZaoqA9NUoQYHvrBg-Vy7Ww0'
 api_service_name = 'youtube'
 api_version = 'v3'
 
@@ -41,7 +41,7 @@ def generate_url(query):
 
     thumbnails = response['items'][0]['snippet']['thumbnails']
     #print(response)
-    return ('https://www.youtube.com/watch?v=' + response['items'][0]['id']['videoId'], thumbnails['default']['url'])
+    return ('https://www.youtube.com/watch?v=' + response['items'][0]['id']['videoId'], thumbnails['default']['url'], title)
 
 print("\n\n")
 print(generate_url("Chinese youth slang rùn meaning to flee"))
