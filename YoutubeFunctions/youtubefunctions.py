@@ -1,18 +1,11 @@
 from googleapiclient.discovery import build
 
-api_key = 'AIzaSyAwTMN48200ehT62T4kwuXw6ru5sKQPsG0'
+api_key = 'AIzaSyDaYiSldkshg_pVfJZL37DjKRlKQo7AVX8'
 api_service_name = 'youtube'
 api_version = 'v3'
 
 youtube = build(api_service_name, api_version, developerKey=api_key)
 
-query = "i like socks"
-
-request = youtube.search().list(
-    q=query,
-    part="snippet",
-    maxResults=10
-)
 
 """generate a url for each query"""
 def generate_urls(list_of_queries, num_queries):
@@ -29,7 +22,7 @@ def generate_url(query):
     request = youtube.search().list(
         q=query,
         part="snippet",
-        maxResults=1,
+        maxResults=5,
         type='video',
         videoDuration = 'medium',
         videoEmbeddable = 'true',
@@ -37,8 +30,18 @@ def generate_url(query):
     )
 
     response = request.execute()
+    
+    for search_result in response.get('items', []):
+        # Access the snippet data for each search result
+        snippet = search_result.get('snippet', {})
+        title = snippet.get('title')
+        thumbnails = snippet.get('thumbnails', {})
+        default_thumbnail_url = thumbnails.get('default', {}).get('url')
+        #print("Here is the new method for this", title,default_thumbnail_url)
+
+    thumbnails = response['items'][0]['snippet']['thumbnails']
     #print(response)
-    return 'https://www.youtube.com/watch?v=' + response['items'][0]['id']['videoId']
+    return ('https://www.youtube.com/watch?v=' + response['items'][0]['id']['videoId'], thumbnails['default']['url'])
 
 print("\n\n")
 print(generate_url("Chinese youth slang rùn meaning to flee"))
