@@ -21,9 +21,25 @@ The notes conclude by highlighting the peculiar situation of the United States i
 
 string2 = "# jflsljdfkls \n# sfs"
 
+"""
 insights = re.split('#', string)
 insights = ['####' + insight for insight in insights if insight != '']
 for insight in insights:
   print("new insight:")
   print(insight)
-print("len: ", len(insights))
+print("len: ", len(insights))"""
+
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Access environment variables
+database_url = os.getenv("DATABASE_URL")
+secret_key = os.getenv("SECRET_KEY")
+debug_mode = os.getenv("DEBUG")
+
+print(database_url)
+print(secret_key)
+print(debug_mode)

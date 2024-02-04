@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+load_dotenv()
 import OpenAIFunctions.openaifunctions as openaifunctions
 import YoutubeFunctions.youtubefunctions as youtubefunctions
 import EmailSender
