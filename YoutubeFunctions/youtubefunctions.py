@@ -31,17 +31,17 @@ def generate_url(query):
 
     response = request.execute()
     
-    search_result = response[0]
-    # Access the snippet data for each search result
-    snippet = search_result.get('snippet', {})
-    title = snippet.get('title')
-    thumbnails = snippet.get('thumbnails', {})
-    default_thumbnail_url = thumbnails.get('default', {}).get('url')
-    #print("Here is the new method for this", title,default_thumbnail_url)
+    for search_result in response.get('items', []):
+        # Access the snippet data for each search result
+        snippet = search_result.get('snippet', {})
+        title = snippet.get('title')
+        thumbnails = snippet.get('thumbnails', {})
+        default_thumbnail_url = thumbnails.get('default', {}).get('url')
+        #print("Here is the new method for this", title,default_thumbnail_url)
 
     thumbnails = response['items'][0]['snippet']['thumbnails']
     #print(response)
-    return ('https://www.youtube.com/watch?v=' + response['items'][0]['id']['videoId'], default_thumbnail_url, title)
+    return ('https://www.youtube.com/watch?v=' + response['items'][0]['id']['videoId'], response['items'][0]['snippet']['thumbnails']['default']['url'], response['items'][0]['snippet']['title'])
 
 print("\n\n")
 print(generate_url("Chinese youth slang rùn meaning to flee"))
