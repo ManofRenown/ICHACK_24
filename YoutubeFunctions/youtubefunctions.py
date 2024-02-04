@@ -41,7 +41,7 @@ def generate_url(query):
 
     thumbnails = response['items'][0]['snippet']['thumbnails']
     #print(response)
-    return ('https://www.youtube.com/watch?v=' + response['items'][0]['id']['videoId'], thumbnails['default']['url'], title)
+    return ('https://www.youtube.com/watch?v=' + response['items'][0]['id']['videoId'], default_thumbnail_url, title)
 
 print("\n\n")
 print(generate_url("Chinese youth slang rùn meaning to flee"))
