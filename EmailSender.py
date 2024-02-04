@@ -143,4 +143,4 @@ email_html = """<h2>Your Daily insights</h2>
 <br><a href="https://www.youtube.com/watch?v=or8AcS6y1xg" target="_blank">Click Here</a><br><img src="https://i.ytimg.com/vi/or8AcS6y1xg/default.jpg" alt="Embedded Image">"""
 
 
-send_email(email_html)
+#send_email(email_html)
