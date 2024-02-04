@@ -37,7 +37,7 @@ def generate_url(query):
         title = snippet.get('title')
         thumbnails = snippet.get('thumbnails', {})
         default_thumbnail_url = thumbnails.get('default', {}).get('url')
-        print("Here is the new method for this", title,default_thumbnail_url)
+        #print("Here is the new method for this", title,default_thumbnail_url)
 
     thumbnails = response['items'][0]['snippet']['thumbnails']
     #print(response)

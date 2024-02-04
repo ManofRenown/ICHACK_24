@@ -48,7 +48,13 @@ def generate_html_email(email, url, description):
 
     return email_content
 
-def send_email(sender_email, receiver_email, subject, password, email_content):
+def send_email(email_content):
+    
+    sender_email =  "ruthvikkonduru29@gmail.com"
+    receiver_email =  "ruthvikkonduru29@gmail.com"
+    subject = 'Embedded Video Email'
+    password = "dkcd ivkw ngmi xokf"
+    
     # Create MIME message
     message = MIMEMultipart()
     message['From'] = sender_email
@@ -57,17 +63,13 @@ def send_email(sender_email, receiver_email, subject, password, email_content):
 
     # Attach HTML content
     message.attach(MIMEText(email_content, 'html'))
-    #message.attach(MIMEText('Hey, I found an interesting video for you. Enjoy!', 'plain'))
-
-    # Attach the YouTube video link
-    #video_html = f'<iframe width="560" height="315" src="{video_url}" frameborder="0" allowfullscreen></iframe>'
-    #message.attach(MIMEText(video_html, 'html'))
 
     # Send email
     with smtplib.SMTP('smtp.gmail.com', 587) as server:
         server.starttls()
         server.login(sender_email, password)
         server.sendmail(sender_email, receiver_email, message.as_string())
+        print("Email sent successfully")
 
 
 def embed_image_html(image_url, alt_text="Embedded Image"):
@@ -104,8 +106,10 @@ def build_email(insight_infos):
     html_content = markdown2.markdown("## Your Daily insights") #convert markdown to html
     for insight_info in insight_infos:
         html_content += markdown2.markdown(insight_info['notes'])
-        html_content += embed_image_html(insight_info['url'])
-        html_content += create_clickable_link_html(insight_info['images'])
+        html_content += "<br>"
+        html_content += create_clickable_link_html(insight_info['url'])
+        html_content += "<br>"
+        html_content += embed_image_html(insight_info['images'])
     return html_content
 
 sender_email =  "ruthvikkonduru29@gmail.com"
@@ -129,3 +133,14 @@ It simplifies the process of managing large volumes of paperwork and facilitates
 
 print(markdown2.markdown(highlight2))
 
+email_html = """<h2>Your Daily insights</h2>
+<h4>Significance of OCR for Business Workflows</h4>
+
+<p>Business processes heavily rely on print media such as paper forms, invoices, legal documents, and contracts. OCR facilitates the digitization of this content, which is crucial for efficient data analysis, streamlined operations, automated processes, and improved productivity.</p>
+<br><a href="https://www.youtube.com/watch?v=23EtQh3wrGA" target="_blank">Click Here</a><br><img src="https://i.ytimg.com/vi/23EtQh3wrGA/default.jpg" alt="Embedded Image"><h4>OCR Text Recognition Methods</h4>
+
+<p>OCR software employs two primary methods for text recognition: pattern matching and feature extraction. While pattern matching compares and matches character images with stored glyphs, feature extraction breaks down glyphs into distinct features to find the best match among stored glyphs.</p>
+<br><a href="https://www.youtube.com/watch?v=or8AcS6y1xg" target="_blank">Click Here</a><br><img src="https://i.ytimg.com/vi/or8AcS6y1xg/default.jpg" alt="Embedded Image">"""
+
+
+send_email(email_html)

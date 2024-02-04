@@ -165,7 +165,7 @@ def test_get_random_entries():
 
 
 # Run sample tests
-# delete_and_create_table()
+#delete_and_create_table()
 # test_add_entries()
 # test_get_random_entries()
 
