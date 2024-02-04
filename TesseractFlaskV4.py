@@ -51,6 +51,9 @@ CORS(app)
 def run_script():
     # Assuming the input file is sent as form data
     input_file = request.files['file']
+    input_email = request.form.get('email')
+    print(input_file)
+    print(input_email)
     #The email and the file are contained inside this!!!!!!!!!!!!!!!!
     # Process the file or data as needed
     text = select(input_file)
