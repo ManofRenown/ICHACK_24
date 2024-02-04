@@ -1,8 +1,13 @@
 from flask import Flask, request, jsonify
-#import pytesseract
+import pytesseract
 import PyPDF2
 from PIL import Image
 from flask_cors import CORS
+from RelevantYTVidGenerator import generate_yt_insights, generate_yt_titles
+import Database
+import os
+import EmailSender
+
 
 #Functions for reading the different file types to txt
 def pic(image_file):
@@ -36,11 +41,11 @@ def pdf(pdf_file):
 #Finds the file type and runs the appropriate function
 def select(file):
 	if file.endswith('.txt') or file.endswith('.md') or file.endswith('.html'):
-		text(file)
+		return text(file)
 	elif file.endswith('.pdf'):
-		pdf(file)
+		return pdf(file)
 	else:
-		pic(file)
+		return pic(file)
 
 app = Flask(__name__)
 CORS(app)
@@ -48,16 +53,40 @@ CORS(app)
 @app.route('/run_script', methods=['POST'])
 def run_script():
     # Assuming the input file is sent as form data
-    input_file = request.files['file']
+    file = request.files['file']
+    temp_dir = 'temp_uploads'
+    os.makedirs(temp_dir, exist_ok=True)
+    file_path = os.path.join(temp_dir, file.filename)
+    print(file_path)
+    file.save(file_path)
+
+    
+
+    input_email = request.form.get('email')
+    print(input_email)
+    #The email and the file are contained inside this!!!!!!!!!!!!!!!!
     # Process the file or data as needed
-    ##text = select(input_file)
-    #return jsonify({'text': "this is hard coded text"})
+    ''''
     return jsonify({
         'links': ["https://coolmathgames.com", "https://star trek.com", "https://taylorswift.com","https://google.co.uk","https://ic.ac.uk"],
         'thumbnails': ["https://i.ytimg.com/vi/cPG6nJRJeWQ/default.jpg","https://i.ytimg.com/vi/cPG6nJRJeWQ/default.jpg","https://i.ytimg.com/vi/cPG6nJRJeWQ/default.jpg","https://i.ytimg.com/vi/cPG6nJRJeWQ/default.jpg","https://i.ytimg.com/vi/cPG6nJRJeWQ/default.jpg"],
-        'titles': ["CMG", "ST", "TS", "Goog", "IC"]
+        'titles': ["TEST2", "ST", "TS", "Goog", "IC"]
     })
-    
+    '''
+    text = select(file_path)
+    print(text)
+    urls, thumbnails, titles = generate_yt_titles(text, 5) #generate the relevant urls and thumnails, need to get titles as well
+    insights, insight_urls, insight_thumbnails = generate_yt_insights(text) #generate the insights and relevant videos
+    Database.add_entries(input_email, insight_urls, insights, insight_thumbnails) #datebot
+    insight_infos = Database.get_random_entries(input_email,3)
+    email_html = EmailSender.build_email(insight_infos)
+    EmailSender.send_email(email_html, input_email)
+    return jsonify({
+        'links': urls, #["https://coolmathgames.com", "https://star trek.com", "https://taylorswift.com","https://google.co.uk","https://ic.ac.uk"],
+        'thumbnails': thumbnails,
+        'titles': titles
+    })
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

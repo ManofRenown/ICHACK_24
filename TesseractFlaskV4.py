@@ -50,23 +50,32 @@ CORS(app)
 @app.route('/run_script', methods=['POST'])
 def run_script():
     # Assuming the input file is sent as form data
-    input_file = request.files['file']
+    input_file_wonky = request.files['file']
+    input_file = input_file_wonky.stream.read()
     input_email = request.form.get('email')
     print(input_email)
-    print(input_file)
+    print(type(input_file))
     #The email and the file are contained inside this!!!!!!!!!!!!!!!!
     # Process the file or data as needed
+    ''''
+    return jsonify({
+        'links': ["https://coolmathgames.com", "https://star trek.com", "https://taylorswift.com","https://google.co.uk","https://ic.ac.uk"],
+        'thumbnails': ["https://i.ytimg.com/vi/cPG6nJRJeWQ/default.jpg","https://i.ytimg.com/vi/cPG6nJRJeWQ/default.jpg","https://i.ytimg.com/vi/cPG6nJRJeWQ/default.jpg","https://i.ytimg.com/vi/cPG6nJRJeWQ/default.jpg","https://i.ytimg.com/vi/cPG6nJRJeWQ/default.jpg"],
+        'titles': ["TEST2", "ST", "TS", "Goog", "IC"]
+    })
     '''
     text = select(input_file)
+    print(text)
     urls, thumbnails, titles = generate_yt_titles(text, 5) #generate the relevant urls and thumnails, need to get titles as well
     insights, insight_urls, insight_thumbnails = generate_yt_insights(text) #generate the insights and relevant videos
     Database.add_entries(input_email, insight_urls, insights, insight_thumbnails) #datebot
+    
     return jsonify({
         'links': urls, #["https://coolmathgames.com", "https://star trek.com", "https://taylorswift.com","https://google.co.uk","https://ic.ac.uk"],
         'thumbnails': thumbnails,
         'titles': titles
     })
-    
-'''
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
