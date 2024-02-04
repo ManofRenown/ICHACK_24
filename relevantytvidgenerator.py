@@ -170,7 +170,7 @@ email_html = EmailSender.build_email(insight_infos)
 
 print(email_html)
 
-EmailSender.send_email(email_html)
+EmailSender.send_email(email_html, "ruthvikkonduru29@gmail.com")
 """
 
 

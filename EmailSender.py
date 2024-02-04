@@ -3,6 +3,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import re
 import markdown2
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 
 
@@ -48,12 +51,12 @@ def generate_html_email(email, url, description):
 
     return email_content
 
-def send_email(email_content):
+def send_email(email_content, receiver_email):
     
-    sender_email =  "ruthvikkonduru29@gmail.com"
-    receiver_email =  "ruthvikkonduru29@gmail.com"
+    sender_email =  os.getenv('SENDER_EMAIL')
+    receiver_email =  receiver_email
     subject = 'Embedded Video Email'
-    password = "dkcd ivkw ngmi xokf"
+    password = os.getenv('SENDER_EMAIL_PASSWORD')
     
     # Create MIME message
     message = MIMEMultipart()
@@ -133,7 +136,7 @@ It simplifies the process of managing large volumes of paperwork and facilitates
 
 #print(markdown2.markdown(highlight2))
 
-email_html = """<h2>Your Daily insights</h2>
+email_html = """<h2>Your Daily insights YO</h2>
 <h4>Significance of OCR for Business Workflows</h4>
 
 <p>Business processes heavily rely on print media such as paper forms, invoices, legal documents, and contracts. OCR facilitates the digitization of this content, which is crucial for efficient data analysis, streamlined operations, automated processes, and improved productivity.</p>
@@ -143,4 +146,4 @@ email_html = """<h2>Your Daily insights</h2>
 <br><a href="https://www.youtube.com/watch?v=or8AcS6y1xg" target="_blank">Click Here</a><br><img src="https://i.ytimg.com/vi/or8AcS6y1xg/default.jpg" alt="Embedded Image">"""
 
 
-#send_email(email_html)
+#send_email(email_html,"ruthvikkonduru29@gmail.com")

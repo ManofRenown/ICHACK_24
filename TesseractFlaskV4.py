@@ -3,6 +3,8 @@ from flask import Flask, request, jsonify
 import PyPDF2
 from PIL import Image
 from flask_cors import CORS
+from RelevantYTVidGenerator import generate_yt_insights, generate_yt_title
+import Database
 
 #Functions for reading the different file types to txt
 def pic(image_file):
@@ -52,6 +54,9 @@ def run_script():
     #The email and the file are contained inside this!!!!!!!!!!!!!!!!
     # Process the file or data as needed
     ##text = select(input_file)
+    #urls, thumbnails = generate_yt_titles(text, 5) #generate the relevant urls and thumnails, need to get titles as well
+    #insights, insight_urls, insight_thumbnails = generate_yt_insights(text) #generate the insights and relevant videos
+    #Database.add_entries(recipeint_email, youtube_url_list, insights, youtube_thumbnail_list) #datebot
     return jsonify({
         'links': ["https://coolmathgames.com", "https://star trek.com", "https://taylorswift.com","https://google.co.uk","https://ic.ac.uk"],
         'thumbnails': ["https://i.ytimg.com/vi/cPG6nJRJeWQ/default.jpg", "https://i.ytimg.com/vi/cPG6nJRJeWQ/default.jpg","https://i.ytimg.com/vi/cPG6nJRJeWQ/default.jpg","https://i.ytimg.com/vi/cPG6nJRJeWQ/default.jpg","https://i.ytimg.com/vi/cPG6nJRJeWQ/default.jpg"],
