@@ -31,13 +31,13 @@ def generate_url(query):
 
     response = request.execute()
     
-    for search_result in response.get('items', []):
-        # Access the snippet data for each search result
-        snippet = search_result.get('snippet', {})
-        title = snippet.get('title')
-        thumbnails = snippet.get('thumbnails', {})
-        default_thumbnail_url = thumbnails.get('default', {}).get('url')
-        #print("Here is the new method for this", title,default_thumbnail_url)
+    search_result = response[0]
+    # Access the snippet data for each search result
+    snippet = search_result.get('snippet', {})
+    title = snippet.get('title')
+    thumbnails = snippet.get('thumbnails', {})
+    default_thumbnail_url = thumbnails.get('default', {}).get('url')
+    #print("Here is the new method for this", title,default_thumbnail_url)
 
     thumbnails = response['items'][0]['snippet']['thumbnails']
     #print(response)
