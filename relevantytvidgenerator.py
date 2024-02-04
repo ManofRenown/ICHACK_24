@@ -10,6 +10,7 @@ import json
 import time
 import re
 
+print(os. getcwd())
 """
 input: a string containing notes, how many youtube requests
 output: list of requests for yt video list
@@ -149,7 +150,7 @@ print("final url: ", url)
 print("final thumbail: ", thumbnail)
 print("final title: ", title)"""
 
-
+'''
 insights, youtube_url_list, youtube_thumbnail_list = generate_yt_insights(notes)
 
 
@@ -174,7 +175,7 @@ print(email_html)
 
 EmailSender.send_email(email_html, "ruthvikkonduru29@gmail.com")
 
-
+'''
 
 
 

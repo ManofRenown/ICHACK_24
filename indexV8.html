@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<!--
+	Photon by HTML5 UP	html5up.net | @ajlkn	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)-->
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Photon by HTML5 UP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css"></noscript>
+  </head>
+  <body class="is-preload">
+    <!-- Header -->
+    <section id="header">
+      <div class="inner"> <span class="icon solid major fa-cloud"></span>
+        <h1>Hi, I'm <strong>NoteNinja</strong>, a note<br>
+          synthesis reinforcement tool.</h1>
+        <p>Import your notes in JPEG form to get access further<br>
+          learning material and targeted questions.</p>
+        <ul class="actions special">
+          <li><a href="#one" class="button scrolly">Upload notes</a></li>
+        </ul>
+      </div>
+    </section>
+    <!-- One -->
+    <section id="one" class="main style1">
+      <div class="container">
+        <div class="row gtr-150">
+          <div class="col-6 col-12-medium">
+            <header class="major">
+              <h2>Upload Your Notes Here</h2>
+            </header>
+            <p>You can upload your notes as a JPEG image. You will then be asked
+              to crop the image to only include the text. This will then be used
+              to generate your reinforced notes.</p>
+            <form id="imageForm" enctype="multipart/form-data" onsubmit="runScript(); return false;">
+              <label for="email">Email:</label> <input id="emailInput" name="email" required="" type="email"> <br>
+              <label for="file">Choose a file:</label> <input id="fileInput" name="file"
+
+                accept="*/*" required="" type="file"> <br>
+              <input value="submit" type="submit"> </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Two -->
+    <section id="two" class="main style2">
+      <div class="container">
+        <div class="row gtr-150">
+          <div class="col-6 col-12-medium"> </div>
+          <div class="col-6 col-12-medium">
+            <style>
+              /* Container for the thumbnail and text */
+              .container {
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+                padding: 20px;
+              }
+              /* Style for the links */
+              .thumbnail-link {
+                display: inline-block;
+                text-decoration: none;
+                overflow: hidden;
+                transition: transform 0.3s ease-in-out;
+              }
+              /* Style for the image within the link */
+              .thumbnail-link img {
+                width: 100%;
+                height: auto;
+                border-radius: 8px;
+              }
+              /* Hover effect */
+              .thumbnail-link:hover {
+                transform: scale(1.5);
+              }
+              /* Style for the text box */
+              .text-box {
+                flex: 1;
+                margin-left: 20px; /* Add some space between the thumbnail and text box */
+              }
+            </style>
+            <header class="major">
+              <h2>Reinforcement Resources</h2>
+            </header>
+            <div id="tempTextDiv">
+              <p id="tempText">Once you upload your notes, your recommended
+                videos will appear here.<br>
+                <strong>Watch This Space.</strong></p>
+              <div>
+                <div id="video1">
+                  <div>
+                    <div id="video2">
+                      <div>
+                        <div id="video3">
+                          <div>
+                            <div id="video4">
+                              <div>
+                                <div id="video5">
+                                  <div> </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Three -->
+    <section id="three" class="main style1 special">
+      <div class="container">
+        <header class="major">
+          <h2>Adipiscing amet consequat</h2>
+        </header>
+        <p>Ante nunc accumsan et aclacus nascetur ac ante amet sapien sed.</p>
+        <div class="row gtr-150">
+          <div class="col-4 col-12-medium"> <span class="image fit"><img src="images/pic02.jpg"
+
+                alt=""></span>
+            <h3>Magna feugiat lorem</h3>
+            <p>Adipiscing a commodo ante nunc magna lorem et interdum mi ante
+              nunc lobortis non amet vis sed volutpat et nascetur.</p>
+            <ul class="actions special">
+              <li><a href="#" class="button">More</a></li>
+            </ul>
+          </div>
+          <div class="col-4 col-12-medium"> <span class="image fit"><img src="images/pic03.jpg"
+
+                alt=""></span>
+            <h3>Magna feugiat lorem</h3>
+            <p>Adipiscing a commodo ante nunc magna lorem et interdum mi ante
+              nunc lobortis non amet vis sed volutpat et nascetur.</p>
+            <ul class="actions special">
+              <li><a href="#" class="button">More</a></li>
+            </ul>
+          </div>
+          <div class="col-4 col-12-medium"> <span class="image fit"><img src="images/pic04.jpg"
+
+                alt=""></span>
+            <h3>Magna feugiat lorem</h3>
+            <p>Adipiscing a commodo ante nunc magna lorem et interdum mi ante
+              nunc lobortis non amet vis sed volutpat et nascetur.</p>
+            <ul class="actions special">
+              <li><a href="#" class="button">More</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Four -->
+    <section id="four" class="main style2 special">
+      <div class="container">
+        <header class="major">
+          <h2>Ipsum feugiat consequat?</h2>
+        </header>
+        <p>Sed lacus nascetur ac ante amet sapien.</p>
+        <ul class="actions special">
+          <li><a href="#" class="button wide primary">Sign Up</a></li>
+          <li><a href="#" class="button wide">Learn More</a></li>
+        </ul>
+      </div>
+    </section>
+    <!-- Five -->
+    <!--
+			<section id="five" class="main style1">				<div class="container">					<header class="major special">						<h2>Elements</h2>					</header>					<section>						<h4>Text</h4>						<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.						This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.						This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>						<hr />						<header>							<h4>Heading with a Subtitle</h4>							<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>						</header>						<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>						<header>							<h5>Heading with a Subtitle</h5>							<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>						</header>						<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>						<hr />						<h2>Heading Level 2</h2>						<h3>Heading Level 3</h3>						<h4>Heading Level 4</h4>						<h5>Heading Level 5</h5>						<h6>Heading Level 6</h6>						<hr />						<h5>Blockquote</h5>						<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>						<h5>Preformatted</h5>						<pre><code>i = 0;while (!deck.isInOrder()) {print 'Iteration ' + i;deck.shuffle();i++;}print 'It took ' + i + ' iterations to sort the deck.';</code></pre>					</section>					<section>						<h4>Lists</h4>						<div class="row">							<div class="col-6 col-12-medium">								<h5>Unordered</h5>								<ul>									<li>Dolor pulvinar etiam.</li>									<li>Sagittis adipiscing.</li>									<li>Felis enim feugiat.</li>								</ul>								<h5>Alternate</h5>								<ul class="alt">									<li>Dolor pulvinar etiam.</li>									<li>Sagittis adipiscing.</li>									<li>Felis enim feugiat.</li>								</ul>							</div>							<div class="col-6 col-12-medium">								<h5>Ordered</h5>								<ol>									<li>Dolor pulvinar etiam.</li>
+									<li>Etiam vel felis viverra.</li>									<li>Felis enim feugiat.</li>									<li>Dolor pulvinar etiam.</li>									<li>Etiam vel felis lorem.</li>									<li>Felis enim et feugiat.</li>								</ol>								<h5>Icons</h5>								<ul class="icons">									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>									<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>								</ul>							</div>						</div>						<h5>Actions</h5>						<div class="row">							<div class="col-6 col-12-medium">								<ul class="actions">									<li><a href="#" class="button primary">Default</a></li>									<li><a href="#" class="button">Default</a></li>								</ul>								<ul class="actions small">									<li><a href="#" class="button primary small">Small</a></li>									<li><a href="#" class="button small">Small</a></li>								</ul>								<ul class="actions stacked">									<li><a href="#" class="button primary">Default</a></li>									<li><a href="#" class="button">Default</a></li>								</ul>								<ul class="actions stacked">									<li><a href="#" class="button primary small">Small</a></li>									<li><a href="#" class="button small">Small</a></li>								</ul>							</div>							<div class="col-6 col-12-medium">								<ul class="actions stacked">									<li><a href="#" class="button primary fit">Default</a></li>									<li><a href="#" class="button fit">Default</a></li>								</ul>								<ul class="actions stacked">									<li><a href="#" class="button primary small fit">Small</a></li>									<li><a href="#" class="button small fit">Small</a></li>								</ul>							</div>						</div>					</section>					<section>						<h4>Table</h4>						<h5>Default</h5>						<div class="table-wrapper">							<table>								<thead>									<tr>										<th>Name</th>										<th>Description</th>										<th>Price</th>									</tr>								</thead>								<tbody>									<tr>										<td>Item One</td>										<td>Ante turpis integer aliquet porttitor.</td>
+										<td>29.99</td>									</tr>									<tr>										<td>Item Two</td>										<td>Vis ac commodo adipiscing arcu aliquet.</td>										<td>19.99</td>									</tr>									<tr>										<td>Item Three</td>										<td> Morbi faucibus arcu accumsan lorem.</td>										<td>29.99</td>									</tr>									<tr>										<td>Item Four</td>										<td>Vitae integer tempus condimentum.</td>										<td>19.99</td>									</tr>									<tr>										<td>Item Five</td>										<td>Ante turpis integer aliquet porttitor.</td>										<td>29.99</td>									</tr>								</tbody>								<tfoot>									<tr>										<td colspan="2"></td>										<td>100.00</td>									</tr>								</tfoot>							</table>						</div>						<h5>Alternate</h5>						<div class="table-wrapper">							<table class="alt">								<thead>									<tr>										<th>Name</th>										<th>Description</th>										<th>Price</th>									</tr>								</thead>								<tbody>									<tr>										<td>Item One</td>										<td>Ante turpis integer aliquet porttitor.</td>										<td>29.99</td>									</tr>									<tr>										<td>Item Two</td>										<td>Vis ac commodo adipiscing arcu aliquet.</td>										<td>19.99</td>									</tr>									<tr>										<td>Item Three</td>										<td> Morbi faucibus arcu accumsan lorem.</td>										<td>29.99</td>									</tr>									<tr>										<td>Item Four</td>										<td>Vitae integer tempus condimentum.</td>										<td>19.99</td>									</tr>									<tr>
+										<td>Item Five</td>										<td>Ante turpis integer aliquet porttitor.</td>										<td>29.99</td>									</tr>								</tbody>								<tfoot>									<tr>										<td colspan="2"></td>										<td>100.00</td>									</tr>								</tfoot>							</table>						</div>					</section>					<section>						<h4>Buttons</h4>						<ul class="actions">							<li><a href="#" class="button primary">Primary</a></li>							<li><a href="#" class="button">Default</a></li>						</ul>						<ul class="actions">							<li><a href="#" class="button large">Large</a></li>							<li><a href="#" class="button">Default</a></li>							<li><a href="#" class="button small">Small</a></li>						</ul>						<ul class="actions fit">							<li><a href="#" class="button fit">Fit</a></li>							<li><a href="#" class="button primary fit">Fit</a></li>							<li><a href="#" class="button fit">Fit</a></li>						</ul>						<ul class="actions fit small">							<li><a href="#" class="button primary fit small">Fit + Small</a></li>							<li><a href="#" class="button fit small">Fit + Small</a></li>							<li><a href="#" class="button primary fit small">Fit + Small</a></li>						</ul>						<ul class="actions">							<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>							<li><a href="#" class="button icon solid fa-download">Icon</a></li>						</ul>						<ul class="actions">							<li><span class="button primary disabled">Disabled</span></li>							<li><span class="button disabled">Disabled</span></li>						</ul>					</section>					<section>						<h4>Form</h4>						<form method="post" action="#">							<div class="row gtr-uniform gtr-50">								<div class="col-6 col-12-xsmall">									<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />								</div>								<div class="col-6 col-12-xsmall">									<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />								</div>								<div class="col-12">									<select name="demo-category" id="demo-category">										<option value="">- Category -</option>										<option value="1">Manufacturing</option>										<option value="1">Shipping</option>										<option value="1">Administration</option>										<option value="1">Human Resources</option>									</select>
+								</div>								<div class="col-4 col-12-small">									<input type="radio" id="demo-priority-low" name="demo-priority" checked>									<label for="demo-priority-low">Low</label>								</div>								<div class="col-4 col-12-small">									<input type="radio" id="demo-priority-normal" name="demo-priority">									<label for="demo-priority-normal">Normal</label>								</div>								<div class="col-4 col-12-small">									<input type="radio" id="demo-priority-high" name="demo-priority">									<label for="demo-priority-high">High</label>								</div>								<div class="col-6 col-12-small">									<input type="checkbox" id="demo-copy" name="demo-copy">									<label for="demo-copy">Email me a copy</label>								</div>								<div class="col-6 col-12-small">									<input type="checkbox" id="demo-human" name="demo-human" checked>									<label for="demo-human">Not a robot</label>								</div>								<div class="col-12">									<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>								</div>								<div class="col-12">									<ul class="actions">										<li><input type="submit" value="Send Message" class="primary" /></li>										<li><input type="reset" value="Reset" /></li>									</ul>								</div>							</div>						</form>					</section>					<section>						<h4>Image</h4>						<h5>Fit</h5>						<div class="box alt">							<div class="row gtr-uniform gtr-50">								<div class="col-12"><span class="image fit"><img src="images/pic06.jpg" alt="" /></span></div>								<div class="col-4"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>								<div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>								<div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>								<div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>								<div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>								<div class="col-4"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>								<div class="col-4"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>								<div class="col-4"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>								<div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>							</div>						</div>						<h5>Left &amp; Right</h5>						<p><span class="image left"><img src="images/pic05.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>						<p><span class="image right"><img src="images/pic05.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>					</section>				</div>			</section>		-->
+    <!-- Footer -->
+    <section id="footer">
+      <ul class="copyright">
+        <li>© Untitled</li>
+        <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+      </ul>
+    </section>
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+      function addVideo(divName, title, link, thumbnail){ //take in the divName as a string
+      	console.log("hi")
+        // Create container div
+        var containerDiv = document.createElement("div");
+        containerDiv.classList.add("container");
+        // Create thumbnail link
+        var thumbnailLink = document.createElement("a");
+        thumbnailLink.href = link;
+        thumbnailLink.classList.add("thumbnail-link");
+
+        // Create thumbnail image
+        var thumbnailImage = document.createElement("img");
+        thumbnailImage.src = thumbnail;
+        thumbnailImage.alt = "Thumbnail Image";
+
+        // Append thumbnail image to the thumbnail link
+        thumbnailLink.appendChild(thumbnailImage);
+
+        // Create text box
+        var textBox = document.createElement("div");
+        textBox.classList.add("text-box");
+
+        // Create paragraph element
+        var paragraph = document.createElement("p");
+        paragraph.textContent = title;
+
+        // Append paragraph to the text box
+        textBox.appendChild(paragraph);
+
+        // Append thumbnail link and text box to the container
+        containerDiv.appendChild(thumbnailLink);
+        containerDiv.appendChild(textBox);
+
+        // Get the reference to the empty div and append the container
+        var emptyDiv = document.getElementById(divName);
+        emptyDiv.appendChild(containerDiv);
+      }
+    </script>
+    <script>
+      var videoData;
+      function runScript(){
+        event.preventDefault();
+        const fileInput = document.getElementById('fileInput');
+        const emailInput = document.getElementById('emailInput');
+        const file = fileInput.files[0];
+        const email = emailInput.value;
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('email', email);
+
+        fetch('http://146.169.153.218:5000/run_script', {
+          method: 'POST',
+          body: formData
+        })
+          .then(response => response.json())
+          .then(data => {
+          videoData = data;
+          var elementToRemove = document.getElementById("tempText");
+      		var elementToAdd = document.createTextNode("Behold! Your AI curated resources to strenghten your understanding.");
+      		elementToRemove.parentNode.insertBefore(elementToAdd, elementToRemove.nextSibling);
+      		// Remove the element
+      		elementToRemove.parentNode.removeChild(elementToRemove);
+          for (let i = 1; i <= 5; i++){
+          	var video = "video" + i.toString();
+            console.log(video);
+            addVideo(video,videoData.titles[i-1], videoData.links[i-1],videoData.thumbnails[i-1]);
+          } 
+        })
+          .catch(error => console.error('Error:', error));
+      }
+    </script>
+    
+  </body>
+</html>
