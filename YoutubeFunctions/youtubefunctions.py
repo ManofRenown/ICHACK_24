@@ -33,7 +33,7 @@ def generate_url(query):
     response = request.execute()
 
     if len(response['items']) > 0:
-        return ('https://www.youtube.com/watch?v=' + response['items'][0]['id']['videoId'], response['items'][0]['snippet']['thumbnails']['maxres']['url'], response['items'][0]['snippet']['title'])
+        return ('https://www.youtube.com/watch?v=' + response['items'][0]['id']['videoId'], response['items'][0]['snippet']['thumbnails']['default']['url'], response['items'][0]['snippet']['title'])
     else:
         print("no search results for this query: ", query)
         return ("","","")

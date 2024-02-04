@@ -74,21 +74,20 @@ def send_email(email_content, receiver_email):
         server.sendmail(sender_email, receiver_email, message.as_string())
         print("Email sent successfully")
 
-
-def embed_image_html(image_url, alt_text="Embedded Image"):
+def embed_image_html(image_url, alt_text="Embedded Image", max_width="80%"):
     """
-    Generate HTML code for embedding an image.
+    Generate HTML code for embedding a responsive image.
 
     Args:
         image_url (str): The URL of the image.
         alt_text (str): Alt text for the image (default is "Embedded Image").
+        max_width (str): Maximum width of the image (default is "100%").
 
     Returns:
-        str: HTML code for embedding the image.
+        str: HTML code for embedding the responsive image.
     """
     html_code = f'<img src="{image_url}" alt="{alt_text}">'
     return html_code
-
 
 def create_clickable_link_html(url, link_text="Click Here"):
     """
@@ -143,7 +142,8 @@ email_html = """<h2>Your Daily insights YO</h2>
 <br><a href="https://www.youtube.com/watch?v=23EtQh3wrGA" target="_blank">Click Here</a><br><img src="https://i.ytimg.com/vi/23EtQh3wrGA/default.jpg" alt="Embedded Image"><h4>OCR Text Recognition Methods</h4>
 
 <p>OCR software employs two primary methods for text recognition: pattern matching and feature extraction. While pattern matching compares and matches character images with stored glyphs, feature extraction breaks down glyphs into distinct features to find the best match among stored glyphs.</p>
-<br><a href="https://www.youtube.com/watch?v=or8AcS6y1xg" target="_blank">Click Here</a><br><img src="https://i.ytimg.com/vi/or8AcS6y1xg/default.jpg" alt="Embedded Image">"""
+<br><a href="https://www.youtube.com/watch?v=or8AcS6y1xg" target="_blank">Click Here</a><br><img src="http://res.cloudinary.com/dvs5wlmar/image/upload/Pasted%20image%2020240107173343.png.png" alt="Embedded Image">"""
 
+#<li><img src="http://res.cloudinary.com/dvs5wlmar/image/upload/Pasted%20image%2020240107173343.png.png" alt="Pasted image 20240107173343.png" /></li>
 
 #send_email(email_html,"ruthvikkonduru29@gmail.com")

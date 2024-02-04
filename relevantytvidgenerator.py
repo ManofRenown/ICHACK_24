@@ -149,7 +149,7 @@ print("final url: ", url)
 print("final thumbail: ", thumbnail)
 print("final title: ", title)"""
 
-"""
+
 insights, youtube_url_list, youtube_thumbnail_list = generate_yt_insights(notes)
 
 
@@ -172,7 +172,7 @@ email_html = EmailSender.build_email(insight_infos)
 
 print(email_html)
 
-EmailSender.send_email(email_html, "ruthvikkonduru29@gmail.com")"""
+EmailSender.send_email(email_html, "ruthvikkonduru29@gmail.com")
 
 
 
