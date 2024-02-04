@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+load_dotenv()
 import OpenAIFunctions.openaifunctions as openaifunctions
 import YoutubeFunctions.youtubefunctions as youtubefunctions
 import EmailSender
@@ -19,12 +21,13 @@ Generate yt vidoes based on these requests.
 def generate_yt_titles(note, num_requests):
 
   #get the open ai client object
-  api_key = os.environ.get('OPENAI_API_KEY') #the env variable
+  api_key = os.getenv('OPENAI_API_KEY') #the env variable
   client = OpenAI()
   client.api_key = api_key
 
   open_ai_request = f"""Generate {num_requests} YouTube requests to find relevant YouTube videos to the notes above. 
-  Do not give the results using a numbered list, instead just use newline to seperate each request. """
+  Do not give the results using a numbered list, instead just use newline to seperate each request. 
+  Do not include any other text apart from the youtube requests"""
   full_open_ai_request = note + "\n\n" + open_ai_request
 
   assistant_id = openaifunctions.create_ytlink_assistant(client) #create new assistant or find assistant that has already been created
@@ -32,7 +35,7 @@ def generate_yt_titles(note, num_requests):
 
   open_ai_response = openaifunctions.send_message(client,assistant_id,thread_id,full_open_ai_request)
 
-  youtube_requests_list = open_ai_response.split('\n')
+  youtube_requests_list = open_ai_response.split('\n') #split each title request assuming they are on new lines
   youtube_requests_list = [re.sub(r'"', '', request.strip()) for request in youtube_requests_list if request] #remove leading and trailing spaces and remove speech marks
 
   youtube_urls_list = []
@@ -48,7 +51,8 @@ def generate_yt_titles(note, num_requests):
   youtube_url_tuples = youtubefunctions.generate_urls(youtube_requests_list, num_requests) #list of tuples containing video url and thumbnail url
   youtube_urls_list = [t[0] for t in youtube_url_tuples] #get all the youtube urls
   youtube_thumbnails_list = [t[1] for t in youtube_url_tuples] #get all the thumbnail urls
-  return youtube_urls_list, youtube_thumbnails_list #return both lists
+  youtube_titles_list = [t[2] for t in youtube_url_tuples] #get all the titles
+  return youtube_urls_list, youtube_thumbnails_list, youtube_titles_list #return both lists
   print("url list: ", youtube_urls_list)
 
 def generate_yt_insights(note):
@@ -75,18 +79,25 @@ def generate_yt_insights(note):
 
   youtube_urls_list = []
   youtube_thumbnails_list = []
+  final_insights_list = [] #we only include insights that actually can find relevant urls
   for insight in insights:
-    youtube_urls, youtube_thumbnails = generate_yt_titles(insight, 1)
+    youtube_urls, youtube_thumbnails, youtube_titles = generate_yt_titles(insight, 1)
     print("the insight: \n" + insight + "\n")
     #print("youtube urls: ", youtube_urls)
     if len(youtube_urls) > 0: #youtube_urls and thumbnails will have the same length
-      youtube_urls_list.append(youtube_urls[0]) #first element of tuple is url link
-      youtube_thumbnails_list.append(youtube_thumbnails[0]) #second element of tuple is the thumbnail link
+      if len(youtube_urls[0]) > 0: #ensure it actually returns youtube url
+        youtube_urls_list.append(youtube_urls[0]) #first element of tuple is url link
+        youtube_thumbnails_list.append(youtube_thumbnails[0]) #second element of tuple is the thumbnail link
+        final_insights_list.append(insight)
 
     
     print("the url: ", youtube_urls[0])
 
-  return (insights, youtube_urls_list, youtube_thumbnails_list)
+  return (final_insights_list, youtube_urls_list, youtube_thumbnails_list)
+
+
+#####  All this stuff is for debugging functions
+
 
 notes = """Optical Character Recognition (OCR) is the process that converts an image of text into a machine-readable text format. For example, if you scan a form or a receipt, your computer saves the scan as an image file. You cannot use a text editor to edit, search, or count the words in the image file. However, you can use OCR to convert the image into a text document with its contents stored as text data.
 Why is OCR important?
@@ -133,10 +144,12 @@ Chinese youths have adopted the slang term "rùn," meaning to flee, as a way to 
 highlight2 = """### Importance of OCR
 OCR technology is important for businesses as it allows for the conversion of image files, such as scanned documents, into machine-readable text format. This enables the utilization of text editing, searching, and word counting functionalities that are not possible with image files. It simplifies the process of managing large volumes of paperwork and facilitates paperless document management, ultimately improving efficiency and productivity in business workflows."""
 
-"""url, thumbnail = generate_yt_titles(highlight2, 1)
+"""url, thumbnail, title = generate_yt_titles(notes, 5)
 print("final url: ", url)
-print("final thumbail: ", thumbnail)"""
+print("final thumbail: ", thumbnail)
+print("final title: ", title)"""
 
+"""
 insights, youtube_url_list, youtube_thumbnail_list = generate_yt_insights(notes)
 
 
@@ -159,7 +172,7 @@ email_html = EmailSender.build_email(insight_infos)
 
 print(email_html)
 
-EmailSender.send_email(email_html)
+EmailSender.send_email(email_html, "ruthvikkonduru29@gmail.com")"""
 
 
 

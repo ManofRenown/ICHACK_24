@@ -1,6 +1,7 @@
 from googleapiclient.discovery import build
+import os
 
-api_key = 'AIzaSyDaYiSldkshg_pVfJZL37DjKRlKQo7AVX8'
+api_key = os.getenv('YT_API_KEY')
 api_service_name = 'youtube'
 api_version = 'v3'
 
@@ -39,12 +40,14 @@ def generate_url(query):
         default_thumbnail_url = thumbnails.get('default', {}).get('url')
         #print("Here is the new method for this", title,default_thumbnail_url)
 
-    thumbnails = response['items'][0]['snippet']['thumbnails']
-    #print(response)
-    return ('https://www.youtube.com/watch?v=' + response['items'][0]['id']['videoId'], thumbnails['default']['url'])
+    if len(response['items']) > 0:
+        return ('https://www.youtube.com/watch?v=' + response['items'][0]['id']['videoId'], response['items'][0]['snippet']['thumbnails']['default']['url'], response['items'][0]['snippet']['title'])
+    else:
+        print("no search results for this query: ", query)
+        return ("","","")
 
-print("\n\n")
-print(generate_url("Chinese youth slang rùn meaning to flee"))
+#print("\n\n")
+#print(generate_url("How is cricket related to business"))
 
 """response = request.execute()
 
